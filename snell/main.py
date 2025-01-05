@@ -3,7 +3,7 @@ import cv2 as cv
 import numpy as np
 import time
 
-color_dictionary = {
+color_map = {
     1: (0, 0, 255),    # Red
     2: (0, 155, 255),  # Orange
     3: (0, 255, 255),  # Yellow
@@ -24,17 +24,9 @@ print('''
 # Taking all inputs first
 # TODO Add wavength and refractive index relation
 light_color = int(input("Choose the color of light::"))
-incident_angle_deg = int(input("Incident angle (degrees)::"))
+incident_angle_deg = float(input("Incident angle (degrees)::"))
 upper_refractive_index = float(input("Refractive Index of Upper medium::"))
 lower_refractive_index = float(input("Refractive Index of Lower medium::"))
-
-
-incident_angle_rad = math.radians(incident_angle_deg)
-
-
-# * Calculate Angle of Refraction (Result is in Radians)
-refraction_angle = math.asin(
-    (upper_refractive_index/lower_refractive_index)*(math.sin(incident_angle_rad)))
 
 # Define all points
 centre_point = (300, 300)
@@ -45,11 +37,17 @@ upper_reference_point = (300, 0)
 # Reference Point to calculate the other coordinate for refracted ray
 lower_reference_point = (300, 600)
 
+start = time.time()
+
+incident_angle_rad = math.radians(incident_angle_deg)
+
+# * Calculate Angle of Refraction (Result is in Radians)
+refraction_angle = math.asin(
+    (upper_refractive_index/lower_refractive_index)*(math.sin(incident_angle_rad)))
 
 def calculate_y(angle):
     length = (upper_reference_point[1] - centre_point[1]) * math.tan(angle)
     return int(length)
-
 
 #! Originally planned to adjust the y-coordinate by 1 due to pixel rounding errors, but decided to ignore it for simplicity.
 calculated_point_incident_ray = (upper_reference_point[0] + int(
@@ -63,8 +61,6 @@ calculated_point_refracted_ray = (lower_reference_point[0] + int(
 calculated_point_reflected_ray = (
     upper_reference_point[0] - calculate_y(incident_angle_rad), upper_reference_point[1])
 
-start = time.time()
-
 screen = np.zeros((600, 600, 3), dtype=np.uint8)  # height width channels
 
 # Fill bottom part with color
@@ -77,12 +73,9 @@ for x in range(600):
 # Lines Part
 cv.line(screen, (300, 0), (300, 600), (105, 105, 105), 1)  # normal line
 cv.line(screen, (0, 300), (600, 300), (255, 255, 255), 1)  # media separator
-cv.line(screen, centre_point, calculated_point_incident_ray,
-        color_dictionary[light_color], 1)
-cv.line(screen, centre_point, calculated_point_reflected_ray,
-        color_dictionary[light_color], 1)
-cv.line(screen, centre_point, calculated_point_refracted_ray,
-        color_dictionary[light_color], 1)
+cv.line(screen, centre_point, calculated_point_incident_ray,color_map[light_color], 1)
+cv.line(screen, centre_point, calculated_point_reflected_ray,color_map[light_color], 1)
+cv.line(screen, centre_point, calculated_point_refracted_ray,color_map[light_color], 1)
 
 # Text part
 u_text = f"n1={upper_refractive_index}"
@@ -97,15 +90,10 @@ cv.putText(screen, "Angle of Incidence=", (50, 100),cv.FONT_HERSHEY_SIMPLEX, 0.3
 cv.putText(screen, str(incident_angle_deg), (50, 120),cv.FONT_HERSHEY_SIMPLEX, 0.35, (0, 255, 255), 1)
 
 # X -X Y -Y
-cv.putText(screen, "X", (590, 290), cv.FONT_HERSHEY_SIMPLEX,
-           0.35, (255, 255, 255), 1)
-cv.putText(screen, "-X", (10, 290), cv.FONT_HERSHEY_SIMPLEX,
-           0.35, (255, 255, 255), 1)
-cv.putText(screen, "Y", (310, 10), cv.FONT_HERSHEY_SIMPLEX,
-           0.35, (255, 255, 255), 1)
-cv.putText(screen, "-Y", (310, 590),
-           cv.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
-
+cv.putText(screen, "X", (590, 290), cv.FONT_HERSHEY_SIMPLEX,0.35, (255, 255, 255), 1)
+cv.putText(screen, "-X", (10, 290), cv.FONT_HERSHEY_SIMPLEX,0.35, (255, 255, 255), 1)
+cv.putText(screen, "Y", (310, 10), cv.FONT_HERSHEY_SIMPLEX,0.35, (255, 255, 255), 1)
+cv.putText(screen, "-Y", (310, 590),cv.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
 
 if screen is None:
     raise ValueError("Image not found")
@@ -115,7 +103,6 @@ cv.imshow('Snell\'s Law Visualizer', screen)
 while True:
     if cv.waitKey(1) & 0xFF == 32:
         break
-
 
 print((end-start))
 
