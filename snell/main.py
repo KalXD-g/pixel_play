@@ -27,6 +27,7 @@ light_color = int(input("Choose the color of light::"))
 incident_angle_deg = float(input("Incident angle (degrees)::"))
 upper_refractive_index = float(input("Refractive Index of Upper medium::"))
 lower_refractive_index = float(input("Refractive Index of Lower medium::"))
+original_wavelength = float(input("Original Wavelength of light::"))
 
 # Define all points
 centre_point = (300, 300)
