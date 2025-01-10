@@ -46,9 +46,11 @@ incident_angle_rad = math.radians(incident_angle_deg)
 refraction_angle = math.asin(
     (upper_refractive_index/lower_refractive_index)*(math.sin(incident_angle_rad)))
 
+
 def calculate_y(angle):
     length = (upper_reference_point[1] - centre_point[1]) * math.tan(angle)
     return int(length)
+
 
 #! Originally planned to adjust the y-coordinate by 1 due to pixel rounding errors, but decided to ignore it for simplicity.
 calculated_point_incident_ray = (upper_reference_point[0] + int(
@@ -74,27 +76,40 @@ for x in range(600):
 # Lines Part
 cv.line(screen, (300, 0), (300, 600), (105, 105, 105), 1)  # normal line
 cv.line(screen, (0, 300), (600, 300), (255, 255, 255), 1)  # media separator
-cv.line(screen, centre_point, calculated_point_incident_ray,color_map[light_color], 1)
-cv.line(screen, centre_point, calculated_point_reflected_ray,color_map[light_color], 1)
-cv.line(screen, centre_point, calculated_point_refracted_ray,color_map[light_color], 1)
+cv.line(screen, centre_point, calculated_point_incident_ray,
+        color_map[light_color], 1)
+cv.line(screen, centre_point, calculated_point_reflected_ray,
+        color_map[light_color], 1)
+cv.line(screen, centre_point, calculated_point_refracted_ray,
+        color_map[light_color], 1)
 
 # Text part
 u_text = f"n1={upper_refractive_index}"
 l_text = f"n2={lower_refractive_index}"
 r_text = f"{(math.degrees(refraction_angle)):.5f}"
 i_text = f"{(incident_angle_deg):.5f}"
-cv.putText(screen, u_text, (80, 250),cv.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
-cv.putText(screen, l_text, (80, 350),cv.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
-cv.putText(screen, "Angle of Refraction=", (50, 500),cv.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
-cv.putText(screen, r_text, (50, 520),cv.FONT_HERSHEY_SIMPLEX, 0.35, (0, 255, 255), 1)
-cv.putText(screen, "Angle of Incidence=", (50, 100),cv.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
-cv.putText(screen, str(incident_angle_deg), (50, 120),cv.FONT_HERSHEY_SIMPLEX, 0.35, (0, 255, 255), 1)
+cv.putText(screen, u_text, (80, 250),
+           cv.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+cv.putText(screen, l_text, (80, 350),
+           cv.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+cv.putText(screen, "Angle of Refraction=", (50, 500),
+           cv.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
+cv.putText(screen, r_text, (50, 520),
+           cv.FONT_HERSHEY_SIMPLEX, 0.35, (0, 255, 255), 1)
+cv.putText(screen, "Angle of Incidence=", (50, 100),
+           cv.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
+cv.putText(screen, str(incident_angle_deg), (50, 120),
+           cv.FONT_HERSHEY_SIMPLEX, 0.35, (0, 255, 255), 1)
 
 # X -X Y -Y
-cv.putText(screen, "X", (590, 290), cv.FONT_HERSHEY_SIMPLEX,0.35, (255, 255, 255), 1)
-cv.putText(screen, "-X", (10, 290), cv.FONT_HERSHEY_SIMPLEX,0.35, (255, 255, 255), 1)
-cv.putText(screen, "Y", (310, 10), cv.FONT_HERSHEY_SIMPLEX,0.35, (255, 255, 255), 1)
-cv.putText(screen, "-Y", (310, 590),cv.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
+cv.putText(screen, "X", (590, 290), cv.FONT_HERSHEY_SIMPLEX,
+           0.35, (255, 255, 255), 1)
+cv.putText(screen, "-X", (10, 290), cv.FONT_HERSHEY_SIMPLEX,
+           0.35, (255, 255, 255), 1)
+cv.putText(screen, "Y", (310, 10), cv.FONT_HERSHEY_SIMPLEX,
+           0.35, (255, 255, 255), 1)
+cv.putText(screen, "-Y", (310, 590),
+           cv.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
 
 if screen is None:
     raise ValueError("Image not found")
