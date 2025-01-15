@@ -25,15 +25,11 @@ With the angle of incidence provided by the user, the code calculates the distan
 
 The formula used is:
 
-\[
-\tan(\theta) = \frac{x}{URP[1] - CP[1]}
-\]
+![Formula for calculating Y]()
 
 Next, the code applies Snell's Law to calculate the angle of refraction and draw the refracted ray:
 
-\[
-n_1 \sin(\text{Angle of incidence}) = n_2 \sin(\text{Angle of refraction})
-\]
+![Snell's Law]()
 
 > **Note:** The project isn't completed yet. Real-world phenomena like total internal reflection, critical angle cases, etc., are still to be implemented.
 
