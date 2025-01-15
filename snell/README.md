@@ -21,7 +21,7 @@ The code creates a black image of size 600x600 pixels, with the center point set
 
 With the angle of incidence provided by the user, the code calculates the distance between the normal line and the reference point needed to draw the incident ray.
 
-![Incident Ray Calculation](img1x01.svg)
+![Incident Ray Calculation](https://github.com/zenwing-g/pixel_play/blob/main/snell/.assets/img1x01.png)
 
 The formula used is:
 
