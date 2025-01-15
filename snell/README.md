@@ -25,11 +25,11 @@ With the angle of incidence provided by the user, the code calculates the distan
 
 The formula used is:
 
-![Formula for calculating Y]()
+![Formula for calculating Y](https://github.com/zenwing-g/pixel_play/blob/main/snell/.assets/img1x02.jpg)
 
 Next, the code applies Snell's Law to calculate the angle of refraction and draw the refracted ray:
 
-![Snell's Law]()
+![Snell's Law](https://github.com/zenwing-g/pixel_play/blob/main/snell/.assets/img1x03.jpg)
 
 > **Note:** The project isn't completed yet. Real-world phenomena like total internal reflection, critical angle cases, etc., are still to be implemented.
 
