@@ -13,12 +13,14 @@ color_map = {
 }
 
 print(
-    """1->Red
+    """
+1->Red
 2->Orange
 3->Yellow
 4->Green
 5->Blue
-6->Purple"""
+6->Purple
+"""
 )
 
 color = int(input("Choose the color of light::"))
