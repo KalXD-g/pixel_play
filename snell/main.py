@@ -3,6 +3,8 @@ import cv2 as cv
 import numpy as np
 import time
 
+
+
 color_map = {
     1: (0, 0, 255),
     2: (0, 155, 255),
@@ -11,6 +13,7 @@ color_map = {
     5: (255, 0, 0),
     6: (255, 0, 255),
 }
+
 
 print(
     """
