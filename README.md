@@ -1,2 +1,2 @@
 # Pixel Play
-Projects I made only for fun.
+Projects I make for fun.
